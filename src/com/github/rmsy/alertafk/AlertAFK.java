@@ -43,6 +43,7 @@ public class AlertAFK extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
+        AAConfig.setupConfig(plugin);
         getServer().getPluginManager().registerEvents(new AAListener(), plugin);
         Player[] players = Bukkit.getOnlinePlayers();
         if (players.length != 0) {
