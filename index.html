@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>AlertAFK by rmsy</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>AlertAFK</h1>
+        <p>Plugin to respond to the mentioning of AFK players in chat.</p>
+
+        <p class="view"><a href="https://github.com/rmsy/AlertAFK">View the Project on GitHub <small>rmsy/AlertAFK</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/rmsy/AlertAFK/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/rmsy/AlertAFK/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/rmsy/AlertAFK">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>AlertAFK</h1>
+
+<h3>What is AlertAFK?</h3>
+
+<p><strong>AlertAFK allows players to designate themselves as AFK, so that other players talking to them in chat are notified that they are not available.</strong></p>
+
+<ul>
+<li>Players can designate a custom AFK message, which will be displayed to users mentioning them (and optionally broadcast to the server when they go AFK, if broadcastGlobally is enabled)</li>
+<li>Players are automatically set back to available when they return to the game - there's no need to remember to run a command</li>
+<li>Several command aliases are available, should there be any incompatibilities with existing plugins.</li>
+</ul><p>AlertAFK was built as light-weight as possible, but this is still my first relatively comprehensive plugin (code-wise; the user interaction is, of course, extremely simple :)), so it may be inefficient in some aspects. Please feel free to <a href="https://github.com/rmsy/AlertAFK/pulls">suggest changes</a> if you think something could be better - in fact, I encourage you to. (What fun is open-source, community-driven software if only one person is writing it?)</p>
+
+<p>AlertAFK is entirely <a href="https://github.com/rmsy/AlertAFK">open-source</a>, and is licensed under the GNU General Public License version 3. Here's what that means for you:</p>
+
+<ul>
+<li>Feel free to do <strong>whatever you want</strong> with AlertAFK</li>
+<li>Feel free to share AlertAFK with <strong>whoever you want</strong>
+but:</li>
+<li>Don't sell it.</li>
+<li>Don't license anything using AlertAFK with a more restricting license.</li>
+</ul><p><strong>I believe in open software, and I believe in freedom of information. Let's use it responsibly and be an example to the world.</strong></p>
+
+<h3>Usage</h3>
+
+<p>This is the usage for AlertAFK:
+`/ [optional AFK message]
+That's it. These are the commands:</p>
+
+<ul>
+<li>/afk</li>
+<li>/a</li>
+<li>/away</li>
+</ul><h3>Configuration</h3>
+
+<p>There are currently only two values in AlertAFK's configuration file. There is <strong>broadcastGlobally</strong>, defaulting to false, which defines whether or not to broadcast to the entire server when a user goes AFK or becomes available again, and <strong>defaultAfkMessage</strong>, which is the default AFK message to be provided, should the user not provide one. The configuration file will be generated on first-run, you do not need to create it manually.</p>
+
+<p><strong>Note:</strong> AlertAFK makes use of Hidendra's <a href="http://metrics.griefcraft.com/">Griefcraft Metrics</a>. These statistics are entirely anonymous, and do not affect performance in any way. <strong>These statistics help me to get an idea of who's using AlertAFK and how, but I respect your right to privacy - should you wish to disable these usage statistics, please opt-out in the PluginMetrics/config.yml file, generated on first-run.</strong></p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/rmsy">rmsy</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
