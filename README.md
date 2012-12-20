@@ -12,11 +12,11 @@ available.**
 AlertAFK was built as light-weight as possible, but this is still my
 first relatively comprehensive plugin (code-wise; the user interaction
 is, of course, extremely simple :)), so it may be inefficient in some
-aspects. Please feel free to (suggest changes)[https://github.com/rmsy/AlertAFK/pulls] if you think something
+aspects. Please feel free to [suggest changes](https://github.com/rmsy/AlertAFK/pulls) if you think something
 could be better - in fact, I encourage you to. (What fun is open-source,
 community-driven software if only one person is writing it?)
 
-AlertAFK is entirely (open-source)[https://github.com/rmsy/AlertAFK], and is licensed under the GNU
+AlertAFK is entirely [open-source](https://github.com/rmsy/AlertAFK), and is licensed under the GNU
 General Public License version 3. Here’s what that means for you:
 
 * Feel free to do **whatever you want** with AlertAFK
@@ -31,8 +31,10 @@ Let’s use it responsibly and be an example to the world.**
 ### Usage
 
 This is the usage for AlertAFK:
-`/<command> [optional AFK message] That’s it.
-These are the commands:
+
+```/<command> [optional AFK message]```
+
+That’s it. These are the commands:
 
 * /afk
 * /a
@@ -48,7 +50,7 @@ AFK message to be provided, should the user not provide one. The
 configuration file will be generated on first-run, you do not need to
 create it manually.
 
-**Note:** AlertAFK makes use of Hidendra’s (Griefcraft Metrics)[http://metrics.griefcraft.com/]. These
+**Note:** AlertAFK makes use of Hidendra’s [Griefcraft Metrics](http://metrics.griefcraft.com/). These
 statistics are entirely anonymous, and do not affect performance in any
 way. **These statistics help me to get an idea of who’s using AlertAFK
 and how, but I respect your right to privacy - should you wish to
