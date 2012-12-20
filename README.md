@@ -31,7 +31,7 @@ Let’s use it responsibly and be an example to the world.**
 ### Usage
 
 This is the usage for AlertAFK:
-`/ [optional AFK message] That’s it.
+`/<command> [optional AFK message] That’s it.
 These are the commands:
 
 * /afk
