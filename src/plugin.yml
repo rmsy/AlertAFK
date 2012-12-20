@@ -15,9 +15,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 name: AlertAFK
-version: 0.1
+version: 1.0
 description: Plugin to respond to the mentioning of AFK players in chat.
-load: POSTWORLD
 author: Isaac Moore <rmsy@me.com>
 website: http://rmsy.github.com/
 database: false

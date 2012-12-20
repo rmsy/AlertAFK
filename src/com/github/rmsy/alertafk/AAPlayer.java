@@ -23,29 +23,12 @@ import org.bukkit.entity.Player;
 /**
  * @author Isaac Moore <rmsy@me.com>
  */
-/**
- * Represents a player on the server, who can be either active or AFK
- */
 public class AAPlayer {
 
-    /**
-     * Bukkit player
-     */
     public Player player;
-    /**
-     * If the player is AFK
-     */
     public boolean afk;
-    /**
-     * The player's custom AFK message
-     */
     public String afkMessage;
 
-    /**
-     * Creates a new AAPlayer and initializes it with default values.
-     *
-     * @param p The player.
-     */
     public AAPlayer(Player p) {
         this.player = p;
         this.afk = false;

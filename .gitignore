@@ -165,3 +165,5 @@ pip-log.txt
 /nbproject/
 build.xml
 manifest.mf
+!/dist/
+/dist/lib/

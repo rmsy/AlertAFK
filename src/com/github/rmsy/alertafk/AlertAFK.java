@@ -32,14 +32,14 @@ import org.mcstats.Metrics;
  * @author Isaac Moore <rmsy@me.com>
  */
 public class AlertAFK extends JavaPlugin {
-    
+
     public static HashMap aaPlayers = new HashMap();
     public static List afkPlayers = new ArrayList();
     public static List nonAfkPlayers = new ArrayList();
     private static AlertAFK plugin = null;
     public static boolean broadcastGlobally;
     public static String defaultAfkMessage;
-    
+
     @Override
     public void onEnable() {
         plugin = this;
@@ -70,23 +70,23 @@ public class AlertAFK extends JavaPlugin {
             getLogger().warning(e.getMessage());
         }
     }
-    
+
     @Override
     public void onDisable() {
         aaPlayers.clear();
         afkPlayers.clear();
         nonAfkPlayers.clear();
     }
-    
+
     private static void populateHashMap(HashMap hm, Player[] p) {
         for (int i = 0; i < p.length; i++) {
             hm.put(p[i].getName(), new AAPlayer(p[i]));
         }
     }
-    
+
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String alias, String[] args) {
-        if (alias.equalsIgnoreCase("afk") || alias.equalsIgnoreCase("a") || alias.equalsIgnoreCase("away")) {
+        if ((alias.equalsIgnoreCase("afk") || alias.equalsIgnoreCase("a") || alias.equalsIgnoreCase("away")) && sender instanceof Player) {
             AAPlayer aaPlayer = (AAPlayer) aaPlayers.get(sender.getName());
             if (aaPlayer.afk) {
                 aaPlayer.setNotAfk();
