@@ -16,6 +16,7 @@
  */
 package com.github.rmsy.alertafk;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -39,10 +40,6 @@ public class AAPlayer {
      * The player's custom AFK message
      */
     public String afkMessage;
-    /**
-     * The default AFK message, defined in config.yml
-     */
-    public static String defaultAfkMessage;
 
     /**
      * Creates a new AAPlayer and initializes it with default values.
@@ -52,29 +49,45 @@ public class AAPlayer {
     public AAPlayer(Player p) {
         this.player = p;
         this.afk = false;
-        this.afkMessage = AAPlayer.defaultAfkMessage;
+        this.afkMessage = AlertAFK.defaultAfkMessage;
+        AlertAFK.nonAfkPlayers.add(this.player);
     }
 
     public void setNotAfk() {
         if (this.afk) {
             this.player.sendMessage(ChatColor.YELLOW + "You are no longer AFK.");
+            if (AlertAFK.broadcastGlobally) {
+                Bukkit.broadcastMessage(ChatColor.YELLOW + this.player.getDisplayName() + ChatColor.YELLOW + " is no longer AFK.");
+            }
             this.afk = false;
+            AlertAFK.afkPlayers.remove(this.player);
+            AlertAFK.nonAfkPlayers.add(this.player);
         }
     }
 
     public void setAfk() {
         if (!this.afk) {
-            player.sendMessage(ChatColor.YELLOW + "You are now AFK - " + ChatColor.YELLOW + AAPlayer.defaultAfkMessage);
-            this.afkMessage = AAPlayer.defaultAfkMessage;
+            this.afkMessage = AlertAFK.defaultAfkMessage;
+            player.sendMessage(ChatColor.YELLOW + "You are now AFK - " + this.afkMessage);
+            if (AlertAFK.broadcastGlobally) {
+                Bukkit.broadcastMessage(ChatColor.YELLOW + this.player.getDisplayName() + ChatColor.YELLOW + " is now AFK - " + this.afkMessage);
+            }
             this.afk = true;
+            AlertAFK.nonAfkPlayers.remove(this.player);
+            AlertAFK.afkPlayers.add(this.player);
         }
     }
 
     public void setAfk(String msg) {
         if (!this.afk) {
             this.afkMessage = msg;
-            player.sendMessage(ChatColor.YELLOW + "You are now AFK - " + ChatColor.YELLOW + this.afkMessage);
+            player.sendMessage(ChatColor.YELLOW + "You are now AFK - " + this.afkMessage);
+            if (AlertAFK.broadcastGlobally) {
+                Bukkit.broadcastMessage(ChatColor.YELLOW + this.player.getDisplayName() + ChatColor.YELLOW + " is now AFK - " + this.afkMessage);
+            }
             this.afk = true;
+            AlertAFK.nonAfkPlayers.remove(this.player);
+            AlertAFK.afkPlayers.add(this.player);
         }
     }
 }

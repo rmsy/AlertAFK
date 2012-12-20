@@ -14,18 +14,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-name: AlertAFK
-version: 0.1
-description: Plugin to respond to the mentioning of AFK players in chat.
-load: POSTWORLD
-author: Isaac Moore <rmsy@me.com>
-website: http://rmsy.github.com/
-database: false
-main: com.github.rmsy.alertafk.AlertAFK
-commands:
-  afk:
-    description: 'Used to set the AFK status and message.'
-    usage: 'Usage: /<command> AFK message'
-    aliases:
-      - a
-      - away
+
+Aesthctic:
+  # Broadcast AFK changes to the entire server
+  broadcastGlobally: false
+  # The default AFK message to be used if none is provided by the user.
+  defaultAfkMessage: Be back in a bit!
