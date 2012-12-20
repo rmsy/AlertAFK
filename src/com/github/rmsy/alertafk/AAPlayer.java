@@ -57,7 +57,7 @@ public class AAPlayer {
         if (this.afk) {
             this.player.sendMessage(ChatColor.YELLOW + "You are no longer AFK.");
             if (AlertAFK.broadcastGlobally) {
-                Bukkit.broadcastMessage(ChatColor.YELLOW + this.player.getDisplayName() + ChatColor.YELLOW + " is no longer AFK.");
+                Bukkit.broadcastMessage(ChatColor.YELLOW + "Note: " + this.player.getDisplayName() + ChatColor.YELLOW + " is no longer AFK.");
             }
             this.afk = false;
             AlertAFK.afkPlayers.remove(this.player);
@@ -70,7 +70,7 @@ public class AAPlayer {
             this.afkMessage = AlertAFK.defaultAfkMessage;
             player.sendMessage(ChatColor.YELLOW + "You are now AFK - " + this.afkMessage);
             if (AlertAFK.broadcastGlobally) {
-                Bukkit.broadcastMessage(ChatColor.YELLOW + this.player.getDisplayName() + ChatColor.YELLOW + " is now AFK - " + this.afkMessage);
+                Bukkit.broadcastMessage(ChatColor.YELLOW + "Note: " + this.player.getDisplayName() + ChatColor.YELLOW + " is now AFK - " + this.afkMessage);
             }
             this.afk = true;
             AlertAFK.nonAfkPlayers.remove(this.player);
@@ -83,7 +83,7 @@ public class AAPlayer {
             this.afkMessage = msg;
             player.sendMessage(ChatColor.YELLOW + "You are now AFK - " + this.afkMessage);
             if (AlertAFK.broadcastGlobally) {
-                Bukkit.broadcastMessage(ChatColor.YELLOW + this.player.getDisplayName() + ChatColor.YELLOW + " is now AFK - " + this.afkMessage);
+                Bukkit.broadcastMessage(ChatColor.YELLOW + "Note: " + this.player.getDisplayName() + ChatColor.YELLOW + " is now AFK - " + this.afkMessage);
             }
             this.afk = true;
             AlertAFK.nonAfkPlayers.remove(this.player);

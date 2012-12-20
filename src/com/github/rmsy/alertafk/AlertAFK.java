@@ -32,56 +32,57 @@ import org.mcstats.Metrics;
  * @author Isaac Moore <rmsy@me.com>
  */
 public class AlertAFK extends JavaPlugin {
-
+    
     public static HashMap aaPlayers = new HashMap();
     public static List afkPlayers = new ArrayList();
     public static List nonAfkPlayers = new ArrayList();
     private static AlertAFK plugin = null;
     public static boolean broadcastGlobally;
     public static String defaultAfkMessage;
-
+    
     @Override
     public void onEnable() {
         plugin = this;
+        getServer().getPluginManager().registerEvents(new AAListener(), plugin);
         Player[] players = Bukkit.getOnlinePlayers();
         if (players.length != 0) {
             populateHashMap(aaPlayers, players);
         }
-//        try {
-//            Metrics metrics = new Metrics(this);
-//            metrics.start();
-//            Metrics.Graph afkStatus = metrics.createGraph("Global player AFK status");
-//            afkStatus.addPlotter(new Metrics.Plotter("AFK") {
-//                @Override
-//                public int getValue() {
-//                    return afkPlayers.size();
-//                }
-//            });
-//            afkStatus.addPlotter(new Metrics.Plotter("Active") {
-//                @Override
-//                public int getValue() {
-//                    return nonAfkPlayers.size();
-//                }
-//            });
-//        } catch (IOException e) {
-//            getLogger().warning("Unable to submit usage statistics:");
-//            getLogger().warning(e.getMessage());
-//        }
+        try {
+            Metrics metrics = new Metrics(this);
+            metrics.start();
+            Metrics.Graph afkStatus = metrics.createGraph("Global player AFK status");
+            afkStatus.addPlotter(new Metrics.Plotter("AFK") {
+                @Override
+                public int getValue() {
+                    return afkPlayers.size();
+                }
+            });
+            afkStatus.addPlotter(new Metrics.Plotter("Active") {
+                @Override
+                public int getValue() {
+                    return nonAfkPlayers.size();
+                }
+            });
+        } catch (IOException e) {
+            getLogger().warning("Unable to submit usage statistics:");
+            getLogger().warning(e.getMessage());
+        }
     }
-
+    
     @Override
     public void onDisable() {
         aaPlayers.clear();
         afkPlayers.clear();
         nonAfkPlayers.clear();
     }
-
+    
     private static void populateHashMap(HashMap hm, Player[] p) {
         for (int i = 0; i < p.length; i++) {
             hm.put(p[i].getName(), new AAPlayer(p[i]));
         }
     }
-
+    
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String alias, String[] args) {
         if (alias.equalsIgnoreCase("afk") || alias.equalsIgnoreCase("a") || alias.equalsIgnoreCase("away")) {

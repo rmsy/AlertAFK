@@ -15,8 +15,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-Aesthctic:
+aesthctic:
   # Broadcast AFK changes to the entire server
   broadcastGlobally: false
   # The default AFK message to be used if none is provided by the user.
-  defaultAfkMessage: Be back in a bit!
+  defaultAfkMessage: 'Be back in a bit!'

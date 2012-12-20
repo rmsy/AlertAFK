@@ -27,7 +27,7 @@ public class AAConfig {
     public static void setupConfig(AlertAFK plugin) {
         FileConfiguration config = plugin.getConfig();
         plugin.saveDefaultConfig();
-        AlertAFK.broadcastGlobally = config.getBoolean("Aesthetic.broadcastGlobally");
-        AlertAFK.defaultAfkMessage = config.getString("Aesthetic.defaultAfkMessage");
+        AlertAFK.broadcastGlobally = config.getBoolean("aesthctic.broadcastGlobally");
+        AlertAFK.defaultAfkMessage = config.getString("aesthctic.defaultAfkMessage");
     }
 }
