@@ -77,7 +77,9 @@ public class AAListener implements Listener {
             for (int i = 0; i < onlinePlayers.length; i++) {
                 if ((e.getMessage().indexOf(onlinePlayers[i].getName())) != -1) {
                     aaPlayer = (AAPlayer) AlertAFK.aaPlayers.get(onlinePlayers[i].getName());
-                    player.sendMessage(ChatColor.RED + "Note: " + onlinePlayers[i].getDisplayName() + ChatColor.RED + " is AFK - " + aaPlayer.afkMessage);
+                    if (aaPlayer.afk) {
+                        player.sendMessage(ChatColor.RED + "Note: " + onlinePlayers[i].getDisplayName() + ChatColor.RED + " is AFK - " + aaPlayer.afkMessage);
+                    }
                 }
             }
         }
