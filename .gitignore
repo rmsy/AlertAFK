@@ -167,3 +167,4 @@ build.xml
 manifest.mf
 /dist/README*
 /dist/lib/
+*.iml
