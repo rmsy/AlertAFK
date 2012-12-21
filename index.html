@@ -22,9 +22,9 @@
 
 
         <ul>
-          <li><a href="https://github.com/rmsy/AlertAFK/blob/master/dist/AlertAFK.jar?raw=true">Install <strong>JAR File</strong></a></li>
           <li><a href="https://github.com/rmsy/AlertAFK/zipball/master">Download <strong>ZIP File</strong></a></li>
           <li><a href="https://github.com/rmsy/AlertAFK/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/rmsy/AlertAFK">View On <strong>GitHub</strong></a></li>
         </ul>
       </header>
       <section>
@@ -32,27 +32,36 @@
 
 <h3>What is AlertAFK?</h3>
 
-<p><strong>AlertAFK allows players to designate themselves as AFK, so that other players talking to them in chat are notified that they are not available.</strong></p>
+<p><strong>AlertAFK allows players to designate themselves as AFK, so that other
+players talking to them in chat are notified that they are not
+available.</strong></p>
 
 <ul>
 <li>Players can designate a custom AFK message, which will be displayed to users mentioning them (and optionally broadcast to the server when they go AFK, if broadcastGlobally is enabled)</li>
-<li>Players are automatically set back to available when they return to the game - there's no need to remember to run a command</li>
+<li>Players are automatically set back to available when they return to the game - there’s no need to remember to run a command</li>
 <li>Several command aliases are available, should there be any incompatibilities with existing plugins.</li>
-</ul><p>AlertAFK was built as light-weight as possible, but this is still my first relatively comprehensive plugin (code-wise; the user interaction is, of course, extremely simple :)), so it may be inefficient in some aspects. Please feel free to <a href="https://github.com/rmsy/AlertAFK/pulls">suggest changes</a> if you think something could be better - in fact, I encourage you to. (What fun is open-source, community-driven software if only one person is writing it?)</p>
+</ul><p>AlertAFK was built as light-weight as possible, but this is still my
+first relatively comprehensive plugin (code-wise; the user interaction
+is, of course, extremely simple :)), so it may be inefficient in some
+aspects. Please feel free to <a href="https://github.com/rmsy/AlertAFK/pulls">suggest changes</a> if you think something
+could be better - in fact, I encourage you to. (What fun is open-source,
+community-driven software if only one person is writing it?)</p>
 
-<p>AlertAFK is entirely <a href="https://github.com/rmsy/AlertAFK">open-source</a>, and is licensed under the GNU General Public License version 3. Here's what that means for you:</p>
+<p>AlertAFK is entirely <a href="https://github.com/rmsy/AlertAFK">open-source</a>, and is licensed under the GNU
+General Public License version 3. Here’s what that means for you:</p>
 
 <ul>
 <li>Feel free to do <strong>whatever you want</strong> with AlertAFK</li>
 <li>Feel free to share AlertAFK with <strong>whoever you want</strong>
 but:</li>
-<li>Don't sell it.</li>
-<li>Don't license anything using AlertAFK with a more restricting license.</li>
-</ul><p><strong>I believe in open software, and I believe in freedom of information. Let's use it responsibly and be an example to the world.</strong></p>
+<li>Don’t sell it.</li>
+<li>Don’t license anything using AlertAFK with a more restricting license.</li>
+</ul><p><strong>I believe in open software, and I believe in freedom of information.
+Let’s use it responsibly and be an example to the world.</strong></p>
 
 <h3>Usage</h3>
 
-<p>This is the usage for AlertAFK:</p>
+<p>This is the usage for toggling AFK:</p>
 
 <p><code>/&lt;command&gt; [optional AFK message]</code></p>
 
@@ -62,11 +71,30 @@ but:</li>
 <li>/afk</li>
 <li>/a</li>
 <li>/away</li>
-</ul><h3>Configuration</h3>
+</ul><p>This is the usage for setting aliases:</p>
 
-<p>There are currently only two values in AlertAFK's configuration file. There is <strong>broadcastGlobally</strong>, defaulting to false, which defines whether or not to broadcast to the entire server when a user goes AFK or becomes available again, and <strong>defaultAfkMessage</strong>, which is the default AFK message to be provided, should the user not provide one. The configuration file will be generated on first-run, you do not need to create it manually.</p>
+<p><code>/alias &lt;add/del/list/clear&gt; [alias]</code></p>
 
-<p><strong>Note:</strong> AlertAFK makes use of Hidendra's <a href="http://metrics.griefcraft.com/">Griefcraft Metrics</a>. These statistics are entirely anonymous, and do not affect performance in any way. <strong>These statistics help me to get an idea of who's using AlertAFK and how, but I respect your right to privacy - should you wish to disable these usage statistics, please opt-out in the PluginMetrics/config.yml file, generated on first-run.</strong></p>
+<h3>Configuration</h3>
+
+<p>There are currently only two values that you need to worry about in AlertAFK’s configuration file.
+There is <strong>broadcastGlobally</strong>, defaulting to false, which defines
+whether or not to broadcast to the entire server when a user goes AFK or
+becomes available again, and <strong>defaultAfkMessage</strong>, which is the default
+AFK message to be provided, should the user not provide one. User-defined aliases are also stored in the configuration file, and can be modified from the configuration file, but are primarily modified from in-game. The
+configuration file will be generated on first-run, you do not need to
+create it manually.</p>
+
+<p><strong>Note:</strong> AlertAFK makes use of Hidendra’s <a href="http://metrics.griefcraft.com/">Griefcraft Metrics</a>. These
+statistics are entirely anonymous, and do not affect performance in any
+way. <strong>These statistics help me to get an idea of who’s using AlertAFK
+and how, but I respect your right to privacy - should you wish to
+disable these usage statistics, please opt-out in the
+PluginMetrics/config.yml file, generated on first-run.</strong></p>
+
+<h4>Latest version</h4>
+
+<p>1.1, CB 1.4.5-R1.0</p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/rmsy">rmsy</a></p>
