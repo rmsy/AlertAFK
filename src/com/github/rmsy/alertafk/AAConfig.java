@@ -16,6 +16,10 @@
  */
 package com.github.rmsy.alertafk;
 
+import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
+
 /**
  * @author Isaac Moore <rmsy@me.com>
  */
@@ -29,9 +33,20 @@ public class AAConfig {
     }
 
     public static void savePlayerAliases(AlertAFK plugin, AAPlayer player) {
-        if (!(player.aliases == null)) {
+        FileConfiguration config = plugin.getConfig();
+        if(config != plugin.config) {
+            setupConfig(plugin);
+        }
+        if (player.aliases.toArray().length > 0) {
             plugin.config.addDefault("aliases." + player.player.getName(), player.aliases);
             plugin.saveConfig();
+        }
+    }
+    public static void saveAllAliases(AlertAFK plugin) {
+        Player[] onlinePlayers = Bukkit.getOnlinePlayers();
+        for(Player p : onlinePlayers) {
+            AAPlayer aaPlayer = (AAPlayer) plugin.aaPlayers.get(p.getName());
+            savePlayerAliases(plugin, aaPlayer);
         }
     }
 }
