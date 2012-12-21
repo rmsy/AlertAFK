@@ -22,12 +22,21 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockDamageEvent;
+import org.bukkit.event.block.SignChangeEvent;
+import org.bukkit.event.enchantment.EnchantItemEvent;
+import org.bukkit.event.hanging.HangingPlaceEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.*;
 
 /**
  * @author Isaac Moore <rmsy@me.com>
  */
 public class AAListener implements Listener {
+
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onPlayerConnect(PlayerJoinEvent e) {
         Player player = e.getPlayer();
@@ -46,14 +55,24 @@ public class AAListener implements Listener {
     public void onPlayerChat(AsyncPlayerChatEvent e) {
         Player player = e.getPlayer();
         AAPlayer aaPlayer = (AAPlayer) AlertAFK.plugin.aaPlayers.get(player.getName());
-        aaPlayer.setNotAfk();
         if (e.isAsynchronous()) {
+            aaPlayer.setNotAfk();
             Player[] onlinePlayers = Bukkit.getOnlinePlayers();
-            for (int i = 0; i < onlinePlayers.length; i++) {
-                if ((e.getMessage().indexOf(onlinePlayers[i].getName())) != -1) {
-                    aaPlayer = (AAPlayer) AlertAFK.plugin.aaPlayers.get(onlinePlayers[i].getName());
+            for (Player onlinePlayer : onlinePlayers) {
+                aaPlayer = (AAPlayer) AlertAFK.plugin.aaPlayers.get(onlinePlayer.getName());
+                if (e.getMessage().contains(onlinePlayer.getName())) {
                     if (aaPlayer.afk) {
-                        player.sendMessage(ChatColor.RED + "Note: " + onlinePlayers[i].getDisplayName() + ChatColor.RED + " is AFK - " + aaPlayer.afkMessage);
+                        player.sendMessage(ChatColor.RED + "Note: " + onlinePlayer.getDisplayName() + ChatColor.RED + " is AFK - " + aaPlayer.afkMessage);
+                    }
+                } else {
+                    if (aaPlayer.aliases.toArray().length > 0) {
+                        for (Object alias : aaPlayer.aliases.toArray()) {
+                            if (e.getMessage().contains(alias.toString())) {
+                                if (aaPlayer.afk) {
+                                    player.sendMessage(ChatColor.RED + "Note: " + onlinePlayer.getDisplayName() + ChatColor.RED + " is AFK - " + aaPlayer.afkMessage);
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -61,49 +80,163 @@ public class AAListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    public void onPlayerEvent(PlayerEvent e) {
+    public void onBlockBreak(BlockBreakEvent e) {
         Player player = e.getPlayer();
         AAPlayer aaPlayer = (AAPlayer) AlertAFK.plugin.aaPlayers.get(player.getName());
         aaPlayer.setNotAfk();
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    public void onPlayerAnimation(PlayerAnimationEvent e) {
+    public void onBlockDamage(BlockDamageEvent e) {
+        Player player = e.getPlayer();
+        AAPlayer aaPlayer = (AAPlayer) AlertAFK.plugin.aaPlayers.get(player.getName());
+        aaPlayer.setNotAfk();
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    public void onChannelChange(PlayerChannelEvent e) {
+    public void onItemEnchant(EnchantItemEvent e) {
+        Player player = e.getEnchanter();
+        AAPlayer aaPlayer = (AAPlayer) AlertAFK.plugin.aaPlayers.get(player.getName());
+        aaPlayer.setNotAfk();
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    public void onPlayerFish(PlayerFishEvent e) {
+    public void onHangingEntityPlace(HangingPlaceEvent e) {
+        Player player = e.getPlayer();
+        AAPlayer aaPlayer = (AAPlayer) AlertAFK.plugin.aaPlayers.get(player.getName());
+        aaPlayer.setNotAfk();
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    public void onPlayerGamemodeChange(PlayerGameModeChangeEvent e) {
+    public void onInventoryClick(InventoryClickEvent e) {
+        Player player = Bukkit.getPlayer(e.getWhoClicked().getName());
+        AAPlayer aaPlayer = (AAPlayer) AlertAFK.plugin.aaPlayers.get(player.getName());
+        aaPlayer.setNotAfk();
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    public void onPlayerJoin(PlayerJoinEvent e) {
+    public void onInventoryDismiss(InventoryCloseEvent e) {
+        Player player = Bukkit.getPlayer(e.getPlayer().getName());
+        AAPlayer aaPlayer = (AAPlayer) AlertAFK.plugin.aaPlayers.get(player.getName());
+        aaPlayer.setNotAfk();
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    public void onPlayerKick(PlayerKickEvent e) {
+    public void onInventoryOpen(InventoryOpenEvent e) {
+        Player player = Bukkit.getPlayer(e.getPlayer().getName());
+        AAPlayer aaPlayer = (AAPlayer) AlertAFK.plugin.aaPlayers.get(player.getName());
+        aaPlayer.setNotAfk();
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    public void onPlayerLevelChange(PlayerLevelChangeEvent e) {
+    public void onBedEnter(PlayerBedEnterEvent e) {
+        Player player = e.getPlayer();
+        AAPlayer aaPlayer = (AAPlayer) AlertAFK.plugin.aaPlayers.get(player.getName());
+        aaPlayer.setNotAfk();
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    public void onPlayerMove(PlayerMoveEvent e) {
+    public void onBedDepart(PlayerBedLeaveEvent e) {
+        Player player = e.getPlayer();
+        AAPlayer aaPlayer = (AAPlayer) AlertAFK.plugin.aaPlayers.get(player.getName());
+        aaPlayer.setNotAfk();
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    public void onPlayerPickupItem(PlayerPickupItemEvent e) {
+    public void onBucketEmpty(PlayerBucketEmptyEvent e) {
+        Player player = e.getPlayer();
+        AAPlayer aaPlayer = (AAPlayer) AlertAFK.plugin.aaPlayers.get(player.getName());
+        aaPlayer.setNotAfk();
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    public void onPlayerVelocityChange(PlayerVelocityEvent e) {
+    public void onBucketFill(PlayerBucketFillEvent e) {
+        Player player = e.getPlayer();
+        AAPlayer aaPlayer = (AAPlayer) AlertAFK.plugin.aaPlayers.get(player.getName());
+        aaPlayer.setNotAfk();
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onPlayerAutocomplete(PlayerChatTabCompleteEvent e) {
+        Player player = e.getPlayer();
+        AAPlayer aaPlayer = (AAPlayer) AlertAFK.plugin.aaPlayers.get(player.getName());
+        aaPlayer.setNotAfk();
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onItemDrop(PlayerDropItemEvent e) {
+        Player player = e.getPlayer();
+        AAPlayer aaPlayer = (AAPlayer) AlertAFK.plugin.aaPlayers.get(player.getName());
+        aaPlayer.setNotAfk();
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onEggThrow(PlayerEggThrowEvent e) {
+        Player player = e.getPlayer();
+        AAPlayer aaPlayer = (AAPlayer) AlertAFK.plugin.aaPlayers.get(player.getName());
+        aaPlayer.setNotAfk();
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onEntityInteract(PlayerInteractEntityEvent e) {
+        Player player = e.getPlayer();
+        AAPlayer aaPlayer = (AAPlayer) AlertAFK.plugin.aaPlayers.get(player.getName());
+        aaPlayer.setNotAfk();
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onInteract(PlayerInteractEvent e) {
+        Player player = e.getPlayer();
+        AAPlayer aaPlayer = (AAPlayer) AlertAFK.plugin.aaPlayers.get(player.getName());
+        aaPlayer.setNotAfk();
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onSlotChange(PlayerItemHeldEvent e) {
+        Player player = e.getPlayer();
+        AAPlayer aaPlayer = (AAPlayer) AlertAFK.plugin.aaPlayers.get(player.getName());
+        aaPlayer.setNotAfk();
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onPortalEntrance(PlayerPortalEvent e) {
+        Player player = e.getPlayer();
+        AAPlayer aaPlayer = (AAPlayer) AlertAFK.plugin.aaPlayers.get(player.getName());
+        aaPlayer.setNotAfk();
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onEntityShear(PlayerShearEntityEvent e) {
+        Player player = e.getPlayer();
+        AAPlayer aaPlayer = (AAPlayer) AlertAFK.plugin.aaPlayers.get(player.getName());
+        aaPlayer.setNotAfk();
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onFlightToggle(PlayerToggleFlightEvent e) {
+        Player player = e.getPlayer();
+        AAPlayer aaPlayer = (AAPlayer) AlertAFK.plugin.aaPlayers.get(player.getName());
+        aaPlayer.setNotAfk();
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onSneakToggle(PlayerToggleSneakEvent e) {
+        Player player = e.getPlayer();
+        AAPlayer aaPlayer = (AAPlayer) AlertAFK.plugin.aaPlayers.get(player.getName());
+        aaPlayer.setNotAfk();
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onSprintToggle(PlayerToggleSprintEvent e) {
+        Player player = e.getPlayer();
+        AAPlayer aaPlayer = (AAPlayer) AlertAFK.plugin.aaPlayers.get(player.getName());
+        aaPlayer.setNotAfk();
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onSignChange(SignChangeEvent e) {
+        Player player = e.getPlayer();
+        AAPlayer aaPlayer = (AAPlayer) AlertAFK.plugin.aaPlayers.get(player.getName());
+        aaPlayer.setNotAfk();
     }
 }
