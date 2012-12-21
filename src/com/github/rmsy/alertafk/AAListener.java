@@ -48,8 +48,6 @@ public class AAListener implements Listener {
         Player player = e.getPlayer();
         AAPlayer aaPlayer = (AAPlayer) AlertAFK.plugin.aaPlayers.get(player.getName());
         AAConfig.savePlayerAliases(AlertAFK.plugin, aaPlayer);
-        aaPlayer.aliases.clear();
-        aaPlayer.aliases = null;
         AlertAFK.plugin.aaPlayers.remove(e.getPlayer().getName());
     }
 

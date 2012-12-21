@@ -28,18 +28,28 @@
 package org.mcstats;
 
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.scheduler.BukkitTask;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
 import java.util.logging.Level;
 
 /**
@@ -147,7 +157,7 @@ public class Metrics {
      *
      * @param name The name of the graph
      * @return Graph object created. Will never return NULL under normal
-     *         circumstances unless bad parameters are given
+     * circumstances unless bad parameters are given
      */
     public Graph createGraph(final String name) {
         if (name == null) {
@@ -489,8 +499,8 @@ public class Metrics {
      * </code>
      *
      * @param buffer the stringbuilder to append the data pair onto
-     * @param key    the key value
-     * @param value  the value
+     * @param key the key value
+     * @param value the value
      */
     private static void encodeDataPair(final StringBuilder buffer, final String key, final String value) throws UnsupportedEncodingException {
         buffer.append('&').append(encode(key)).append('=').append(encode(value));
@@ -605,7 +615,7 @@ public class Metrics {
          * Construct a plotter with a specific plot name
          *
          * @param name the name of the plotter to use, which will show up on the
-         *             website
+         * website
          */
         public Plotter(final String name) {
             this.name = name;

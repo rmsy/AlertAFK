@@ -104,10 +104,10 @@ public class AlertAFK extends JavaPlugin {
                 }
             } else if (alias.equalsIgnoreCase("alias")) {
                 if ((args.length >= 1) && args[0].equalsIgnoreCase("clear")) {
-                    if (aaPlayer.aliases.toArray().length > 0) {
+                    if(aaPlayer.aliases.toArray().length > 0) {
                         aaPlayer.aliases.clear();
                         sender.sendMessage(ChatColor.YELLOW + "Your aliases have been cleared.");
-                    } else {
+                    }   else {
                         sender.sendMessage(ChatColor.YELLOW + "You don't have any aliases.");
                     }
                 } else if ((args.length >= 1) && args[0].equalsIgnoreCase("list")) {
@@ -135,7 +135,7 @@ public class AlertAFK extends JavaPlugin {
                     } else if (aaPlayer.aliases.contains(args[1])) {
                         aaPlayer.aliases.remove(args[1]);
                         sender.sendMessage(ChatColor.YELLOW + args[1] + ChatColor.YELLOW + " has been removed from your aliases.");
-                    } else {
+                    }   else {
                         sender.sendMessage(ChatColor.YELLOW + args[1] + " is not an alias.");
                     }
                 } else {
