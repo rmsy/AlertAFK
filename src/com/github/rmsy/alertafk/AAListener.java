@@ -28,29 +28,29 @@ import org.bukkit.event.player.*;
  * @author Isaac Moore <rmsy@me.com>
  */
 public class AAListener implements Listener {
-
+    // TODO: Make listeners ignore cancelled events
     @EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerConnect(PlayerJoinEvent e) {
         Player player = e.getPlayer();
-        AlertAFK.aaPlayers.put(e.getPlayer().getName(), new AAPlayer(player));
+        AlertAFK.plugin.aaPlayers.put(e.getPlayer().getName(), new AAPlayer(player));
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerDisconnect(PlayerQuitEvent e) {
         Player player = e.getPlayer();
-        AlertAFK.aaPlayers.remove(e.getPlayer().getName());
+        AlertAFK.plugin.aaPlayers.remove(e.getPlayer().getName());
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerChat(AsyncPlayerChatEvent e) {
         Player player = e.getPlayer();
-        AAPlayer aaPlayer = (AAPlayer) AlertAFK.aaPlayers.get(player.getName());
+        AAPlayer aaPlayer = (AAPlayer) AlertAFK.plugin.aaPlayers.get(player.getName());
         aaPlayer.setNotAfk();
         if (e.isAsynchronous()) {
             Player[] onlinePlayers = Bukkit.getOnlinePlayers();
             for (int i = 0; i < onlinePlayers.length; i++) {
                 if ((e.getMessage().indexOf(onlinePlayers[i].getName())) != -1) {
-                    aaPlayer = (AAPlayer) AlertAFK.aaPlayers.get(onlinePlayers[i].getName());
+                    aaPlayer = (AAPlayer) AlertAFK.plugin.aaPlayers.get(onlinePlayers[i].getName());
                     if (aaPlayer.afk) {
                         player.sendMessage(ChatColor.RED + "Note: " + onlinePlayers[i].getDisplayName() + ChatColor.RED + " is AFK - " + aaPlayer.afkMessage);
                     }
@@ -62,7 +62,7 @@ public class AAListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerEvent(PlayerEvent e) {
         Player player = e.getPlayer();
-        AAPlayer aaPlayer = (AAPlayer) AlertAFK.aaPlayers.get(player.getName());
+        AAPlayer aaPlayer = (AAPlayer) AlertAFK.plugin.aaPlayers.get(player.getName());
         aaPlayer.setNotAfk();
     }
 

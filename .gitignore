@@ -63,7 +63,7 @@ local.properties
 .builds
 *.dotCover
 
-## TODO: If you have NuGet Package Restore enabled, uncomment this
+## If you have NuGet Package Restore enabled, uncomment this
 #packages/
 
 # Visual C++ cache files
@@ -168,3 +168,38 @@ manifest.mf
 /dist/README*
 /dist/lib/
 *.iml
+.idea/.name
+
+.idea/ant.xml
+
+.idea/workspace.xml
+
+.idea/vcs.xml
+
+*.xml
+
+.idea/scopes/scope_settings.xml
+
+.idea/modules.xml
+
+.idea/misc.xml
+
+.idea/libraries/Bukkit_1_4_6_R0_1.xml
+
+.idea/encodings.xml
+
+.idea/dictionaries/Isaac.xml
+
+.idea/copyright/profiles_settings.xml
+
+.idea/copyright/GPL_v3.xml
+
+.idea/compiler.xml
+
+.idea/codeStyleSettings.xml
+
+.idea/artifacts/AlertAFK.xml
+
+.idea/ant.xml
+
+.idea/.name

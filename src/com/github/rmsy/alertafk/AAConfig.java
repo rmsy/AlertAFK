@@ -16,18 +16,22 @@
  */
 package com.github.rmsy.alertafk;
 
-import org.bukkit.configuration.file.FileConfiguration;
-
 /**
- *
  * @author Isaac Moore <rmsy@me.com>
  */
 public class AAConfig {
 
     public static void setupConfig(AlertAFK plugin) {
-        FileConfiguration config = plugin.getConfig();
+        plugin.config = plugin.getConfig();
         plugin.saveDefaultConfig();
-        AlertAFK.broadcastGlobally = config.getBoolean("aesthctic.broadcastGlobally");
-        AlertAFK.defaultAfkMessage = config.getString("aesthctic.defaultAfkMessage");
+        plugin.broadcastGlobally = plugin.config.getBoolean("aesthetic.broadcastGlobally");
+        plugin.defaultAfkMessage = plugin.config.getString("aesthetic.defaultAfkMessage");
+    }
+
+    public static void savePlayerAliases(AlertAFK plugin, AAPlayer player) {
+        if (!(player.aliases == null)) {
+            plugin.config.addDefault("aliases." + player.player.getName(), player.aliases);
+            plugin.saveConfig();
+        }
     }
 }
