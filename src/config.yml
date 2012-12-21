@@ -20,3 +20,4 @@ aesthetic:
   broadcastGlobally: false
   # The default AFK message to be used if none is provided by the user.
   defaultAfkMessage: 'Be back in a bit!'
+  aliases: {}
