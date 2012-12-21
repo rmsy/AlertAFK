@@ -41,6 +41,7 @@ public class AAConfig {
             plugin.config.addDefault("aliases." + player.player.getName(), player.aliases);
             plugin.saveConfig();
         }
+        plugin.saveConfig();
     }
     public static void saveAllAliases(AlertAFK plugin) {
         Player[] onlinePlayers = Bukkit.getOnlinePlayers();
@@ -48,5 +49,6 @@ public class AAConfig {
             AAPlayer aaPlayer = (AAPlayer) plugin.aaPlayers.get(p.getName());
             savePlayerAliases(plugin, aaPlayer);
         }
+        plugin.saveConfig();
     }
 }

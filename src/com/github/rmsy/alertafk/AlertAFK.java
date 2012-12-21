@@ -16,7 +16,6 @@
  */
 package com.github.rmsy.alertafk;
 
-import com.sun.xml.internal.ws.client.SenderException;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -84,6 +83,7 @@ public class AlertAFK extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        AAConfig.saveAllAliases(this);
         aaPlayers.clear();
         afkPlayers.clear();
         nonAfkPlayers.clear();
@@ -93,6 +93,7 @@ public class AlertAFK extends JavaPlugin {
     public boolean onCommand(CommandSender sender, Command cmd, String alias, String[] args) {
         if (sender instanceof Player) {
             AAPlayer aaPlayer = (AAPlayer) aaPlayers.get(sender.getName());
+            aaPlayer.setNotAfk();
             if (alias.equalsIgnoreCase("afk") || alias.equalsIgnoreCase("a") || alias.equalsIgnoreCase("away")) {
                 if (aaPlayer.afk) {
                     aaPlayer.setNotAfk();
@@ -103,38 +104,42 @@ public class AlertAFK extends JavaPlugin {
                 }
             } else if (alias.equalsIgnoreCase("alias")) {
                 if ((args.length >= 1) && args[0].equalsIgnoreCase("clear")) {
-                    if (aaPlayer.aliases != null) {
+                    if(aaPlayer.aliases.toArray().length > 0) {
                         aaPlayer.aliases.clear();
-                        aaPlayer.aliases = null;
+                        sender.sendMessage(ChatColor.YELLOW + "Your aliases have been cleared.");
+                    }   else {
+                        sender.sendMessage(ChatColor.YELLOW + "You don't have any aliases.");
                     }
                 } else if ((args.length >= 1) && args[0].equalsIgnoreCase("list")) {
-                    if (aaPlayer.aliases != null) {
+                    if (aaPlayer.aliases.toArray().length > 0) {
                         sender.sendMessage(ChatColor.YELLOW + "Your aliases: " + StringUtils.join(aaPlayer.aliases.toArray(), ", "));
                     } else {
                         sender.sendMessage(ChatColor.YELLOW + "You don't have any aliases.");
                     }
                 } else if ((args.length >= 2) && args[0].equalsIgnoreCase("add")) {
                     if (args[1].length() >= 3) {
-                        if (aaPlayer.aliases != null) {
+                        if (aaPlayer.aliases.toArray().length > 0) {
                             aaPlayer.aliases.add(args[1]);
-                            sender.sendMessage(ChatColor.YELLOW + args[2] + ChatColor.YELLOW + " has been added to your aliases.");
+                            sender.sendMessage(ChatColor.YELLOW + args[1] + ChatColor.YELLOW + " has been added to your aliases.");
                         } else {
                             aaPlayer.aliases = new ArrayList();
                             aaPlayer.aliases.add(args[1]);
-                            sender.sendMessage(ChatColor.YELLOW + args[2] + ChatColor.YELLOW + " has been added to your aliases.");
+                            sender.sendMessage(ChatColor.YELLOW + args[1] + ChatColor.YELLOW + " has been added to your aliases.");
                         }
                     } else {
                         sender.sendMessage(ChatColor.RED + "Aliases must be at least 3 characters in length.");
                     }
-                } else if ((args.length >= 2) && args[0].equalsIgnoreCase("remove")) {
-                    if (aaPlayer.aliases == null) {
+                } else if ((args.length >= 2) && args[0].equalsIgnoreCase("del")) {
+                    if (aaPlayer.aliases.toArray().length < 1) {
                         sender.sendMessage(ChatColor.YELLOW + "You don't have any aliases.");
-                    } else if (aaPlayer.aliases.contains(args[2])) {
-                        aaPlayer.aliases.remove(args[2]);
-                        sender.sendMessage(ChatColor.YELLOW + args[2] + ChatColor.YELLOW + " has been removed from your aliases.");
+                    } else if (aaPlayer.aliases.contains(args[1])) {
+                        aaPlayer.aliases.remove(args[1]);
+                        sender.sendMessage(ChatColor.YELLOW + args[1] + ChatColor.YELLOW + " has been removed from your aliases.");
+                    }   else {
+                        sender.sendMessage(ChatColor.YELLOW + args[1] + " is not an alias.");
                     }
                 } else {
-                    sender.sendMessage(ChatColor.RED + "Usage: /alias <add/remove/list/clear> [alias]");
+                    sender.sendMessage(ChatColor.RED + "Usage: /alias <add/del/list/clear> [alias]");
                 }
             }
             return true;
