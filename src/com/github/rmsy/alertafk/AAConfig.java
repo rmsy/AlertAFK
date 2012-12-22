@@ -17,7 +17,6 @@
 package com.github.rmsy.alertafk;
 
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 /**
@@ -27,29 +26,32 @@ public class AAConfig {
 
     public static void setupConfig(AlertAFK plugin) {
         plugin.saveDefaultConfig();
-        plugin.saveConfig();
         plugin.config = plugin.getConfig();
         plugin.broadcastGlobally = plugin.config.getBoolean("aesthetic.broadcastGlobally");
         plugin.defaultAfkMessage = plugin.config.getString("aesthetic.defaultAfkMessage");
     }
 
     public static void savePlayerAliases(AlertAFK plugin, AAPlayer player) {
-        FileConfiguration config = plugin.getConfig();
-        if (config != plugin.config) {
-            setupConfig(plugin);
-        }
+        setupConfig(plugin);
         if (player.aliases.toArray().length > 0) {
             plugin.config.set("aliases." + player.player.getName(), player.aliases);
+            plugin.getLogger().info("Player's aliases is longer than 0");
         }
         plugin.saveConfig();
     }
 
+
+
     public static void saveAllAliases(AlertAFK plugin) {
         Player[] onlinePlayers = Bukkit.getOnlinePlayers();
-        for (Player p : onlinePlayers) {
-            AAPlayer aaPlayer = (AAPlayer) plugin.aaPlayers.get(p.getName());
-            savePlayerAliases(plugin, aaPlayer);
+        if (onlinePlayers.length > 0) {
+
+            for (Player p : onlinePlayers) {
+                AAPlayer aaPlayer = (AAPlayer) plugin.aaPlayers.get(p.getName());
+                savePlayerAliases(plugin, aaPlayer);
+            }
         }
+        setupConfig(plugin);
         plugin.saveConfig();
     }
 }
