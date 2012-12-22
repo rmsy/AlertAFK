@@ -65,4 +65,5 @@ PluginMetrics/config.yml file, generated on first-run.**
 
 #### Latest version
 1.1, CB 1.4.5-R1.0
+
 [Click here to directly download the latest stable version.](https://github.com/rmsy/AlertAFK/blob/master/dist/AlertAFK.jar?raw=true)
