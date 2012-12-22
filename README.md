@@ -7,6 +7,7 @@ available.**
 
 * Players can designate a custom AFK message, which will be displayed to users mentioning them (and optionally broadcast to the server when they go AFK, if broadcastGlobally is enabled)
 * Players are automatically set back to available when they return to the game - there’s no need to remember to run a command
+* Players can designate custom "aliases" that will also trigger a notification that they are unavailable
 * Several command aliases are available, should there be any incompatibilities with existing plugins.
 
 AlertAFK was built as light-weight as possible, but this is still my
@@ -64,3 +65,4 @@ PluginMetrics/config.yml file, generated on first-run.**
 
 #### Latest version
 1.1, CB 1.4.5-R1.0
+[Click here to directly download the latest stable version.](https://github.com/rmsy/AlertAFK/blob/master/dist/AlertAFK.jar?raw=true)
