@@ -67,4 +67,5 @@ PluginMetrics/config.yml file, generated on first-run.**
 1.1, CB 1.4.5-R1.0
 
 [Click here to directly download the latest stable version.](https://github.com/rmsy/AlertAFK/blob/master/dist/AlertAFK.jar?raw=true)
+
 [![Usage statistics](http://mcstats.org/signature/alertafk.png)](http://mcstats.org/plugin/AlertAFK)
