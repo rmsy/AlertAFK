@@ -62,10 +62,16 @@ and how, but I respect your right to privacy - should you wish to
 disable these usage statistics, please opt-out in the
 PluginMetrics/config.yml file, generated on first-run.**
 
+### Building
+I use Maven to manage my dependencies. Installing the project into your local Maven repository is as simple as ```mvn clean install```.
+
+* To create an Eclipse project file: ```mvn eclipse:eclipse```
+* To create an IntelliJ IDEA project file: ```mvn idea:idea```
+* To create a package file: ```mvn compile package```
 
 #### Latest version
-1.1, CB 1.4.5-R1.0
+1.1, CB 1.4.7-R1.0
 
-[Click here to directly download the latest stable version.](https://github.com/rmsy/AlertAFK/blob/master/dist/AlertAFK.jar?raw=true)
+[Click here to directly download the latest stable version.](http://dev.bukkit.org/server-mods/alertafk/)
 
 [![Usage statistics](http://mcstats.org/signature/alertafk.png)](http://mcstats.org/plugin/AlertAFK)
