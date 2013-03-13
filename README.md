@@ -74,6 +74,10 @@ I use Maven to manage my dependencies. Installing the project into your local Ma
 
 [Click here to directly download the latest stable version.](http://dev.bukkit.org/server-mods/alertafk/)
 
-#####Build status
+##### Build status
+
 [![Build Status](https://secure.travis-ci.org/rmsy/AlertAFK.png)](http://travis-ci.org/rmsy/AlertAFK)
+
+##### Usage Statistics
+
 [![Usage statistics](http://mcstats.org/signature/alertafk.png)](http://mcstats.org/plugin/AlertAFK)
