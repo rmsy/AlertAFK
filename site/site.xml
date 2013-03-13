@@ -1,0 +1,33 @@
+<!--
+Copyright (C) 2012 Isaac Moore <rmsy@me.com>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<project name="AlertAFK" xmlns="http://maven.apache.org/DECORATION/1.3.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/DECORATION/1.3.0 http://maven.apache.org/xsd/decoration-1.3.0.xsd">
+    <publishDate format="MM/dd/yyyy"/>
+    <!-- TODO: Ensure that poweredBy logos are not too large !-->
+    <poweredBy>
+        <logo name="Bukkit" href="http://dl.bukkit.org/" img="http://bukkit.org/logo.png" alt="Bukkit" target="_blank"
+              title="Bukkit server API"/>
+        <logo name="MCStats" href="https://mcstats.org/" img="http://i.imgur.com/BJNZhmP.png?1" alt="MCStats"
+              target="_blank" title="MCStats analytics API"/>
+    </poweredBy>
+    <skin>
+        <groupId>org.apache.maven.skins</groupId>
+        <artifactId>maven-fluido-skin</artifactId>
+        <version>1.3.0</version>
+    </skin>
+</project>

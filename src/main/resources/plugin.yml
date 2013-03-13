@@ -14,9 +14,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-name: AlertAFK
-version: 1.1
-description: Plugin to respond to the mentioning of AFK players in chat.
+name: ${project.name}
+version: ${project.version}
+description: ${project.description}
 load: POSTWORLD
 author: Isaac Moore <rmsy@me.com>
 website: http://rmsy.github.com/
