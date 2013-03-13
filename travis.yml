@@ -1,0 +1,16 @@
+language: java
+jdk:
+  - oraclejdk7
+  - openjdk7
+  - openjdk6
+notifications:
+  email:
+    recipients:
+      - rmsy@me.com
+    on_success: change
+    on_failure: always
+  irc:
+    channels:
+        - "irc.rizon.net#MCBall-dev"
+        - "irc.esper.net#MCBall"
+    skip_join: true
