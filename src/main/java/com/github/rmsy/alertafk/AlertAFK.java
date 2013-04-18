@@ -1,21 +1,15 @@
 /*
- * Copyright (C) 2012 Isaac Moore <rmsy@me.com>
+ * Copyright (C) 2013 Isaac Moore <rmsy@me.com>
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.github.rmsy.alertafk;
 
+import com.github.rmsy.alertafk.base.SimpleConfigManager;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -26,6 +20,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mcstats.Metrics;
 
+import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,8 +35,15 @@ public class AlertAFK extends JavaPlugin {
     public HashMap aaPlayers = new HashMap();
     public List afkPlayers = new ArrayList();
     public List nonAfkPlayers = new ArrayList();
-    public boolean broadcastGlobally;
-    public String defaultAfkMessage;
+    /**
+     * Whether or not AFK messages are being broadcast globally.
+     */
+    private boolean broadcastGlobally;
+    /**
+     * The default AFK message.
+     */
+    @Nonnull
+    private String defaultAfkMessage;
     public FileConfiguration config;
 
     private static void setUpPlayers(HashMap hm, Player[] p) {
@@ -53,7 +55,7 @@ public class AlertAFK extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
-        AAConfig.setupConfig(plugin);
+        SimpleConfigManager.setupConfig(plugin);
         getServer().getPluginManager().registerEvents(new AAListener(), plugin);
         Player[] players = Bukkit.getOnlinePlayers();
         if (players.length != 0) {
@@ -83,7 +85,7 @@ public class AlertAFK extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        AAConfig.saveAllAliases(this);
+        SimpleConfigManager.saveAllAliases(this);
         aaPlayers.clear();
         afkPlayers.clear();
         nonAfkPlayers.clear();
@@ -145,5 +147,42 @@ public class AlertAFK extends JavaPlugin {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Gets the default AFK message.
+     *
+     * @return The default AFK message.
+     */
+    @Nonnull
+    public String getDefaultAfkMessage() {
+        return defaultAfkMessage;
+    }
+
+    /**
+     * Sets the default AFK message.
+     *
+     * @param defaultAfkMessage The default AFK message.
+     */
+    public void setDefaultAfkMessage(@Nonnull final String defaultAfkMessage) {
+        this.defaultAfkMessage = defaultAfkMessage;
+    }
+
+    /**
+     * Gets whether or not AFK messages are being broadcast globally.
+     *
+     * @return Whether or not AFK messages are being broadcast globally.
+     */
+    public boolean isBroadcastGlobally() {
+        return broadcastGlobally;
+    }
+
+    /**
+     * Sets whether or not AFK messages are being broadcast globally.
+     *
+     * @param broadcastGlobally Whether or not AFK messages are being broadcast globally.
+     */
+    public void setBroadcastGlobally(boolean broadcastGlobally) {
+        this.broadcastGlobally = broadcastGlobally;
     }
 }
