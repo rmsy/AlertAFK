@@ -10,8 +10,57 @@
 
 package com.github.rmsy.alertafk;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 /**
  * Represents a player on the server.
  */
 public interface Player {
+    /**
+     * Gets the player's current AFK message.
+     *
+     * @return The player's AFK message, or null if not AFK.
+     */
+    @Nullable
+    String getAfkMessage();
+
+    /**
+     * Sets the player as AFK with the specified message.
+     *
+     * @param message The message to be used when setting the player as AFK.
+     */
+    void setAfkWithMessage(@Nonnull final String message);
+
+    /**
+     * Modifies the player's AFK message while they're AFK. If the player is not AFK, this is ignored.
+     *
+     * @param message The message to set.
+     */
+    void changeAfkMessage(@Nonnull final String message);
+
+    /**
+     * Sets the player either to or from AFK.
+     *
+     * @param afk Whether or not the player is AFK.
+     */
+    void setAfk(final boolean afk);
+
+    /**
+     * Sets the player to AFK.
+     */
+    void setAfk();
+
+    /**
+     * Sets the player as not AFK.
+     */
+    void setNotAfk();
+
+    /**
+     * Gets the relative Bukkit player.
+     *
+     * @return The relative Bukkit player.
+     */
+    @Nonnull
+    org.bukkit.entity.Player getPlayer();
 }

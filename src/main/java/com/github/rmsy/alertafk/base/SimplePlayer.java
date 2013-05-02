@@ -7,8 +7,9 @@
  *
  * You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.github.rmsy.alertafk;
+package com.github.rmsy.alertafk.base;
 
+import com.github.rmsy.alertafk.AlertAFK;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -18,14 +19,14 @@ import java.util.List;
 /**
  * @author Isaac Moore <rmsy@me.com>
  */
-public class AAPlayer {
+public final class SimplePlayer implements com.github.rmsy.alertafk.Player {
 
     public Player player;
     public boolean afk;
     public String afkMessage;
     public List aliases;
 
-    public AAPlayer(Player p) {
+    public SimplePlayer(Player p) {
         this.player = p;
         this.afk = false;
         this.afkMessage = AlertAFK.plugin.defaultAfkMessage;
@@ -46,13 +47,29 @@ public class AAPlayer {
         }
     }
 
+    /**
+     * Sets the player either to or from AFK.
+     *
+     * @param afk Whether or not the player is AFK.
+     */
+    public void setAfk(final boolean afk) {
+        if (!(this.afk == afk)) {
+            if (afk) {
+                setAfk();
+            } else {
+                setNotAfk();
+            }
+        }
+    }
+
+    /**
+     * Sets the player to AFK.
+     */
     public void setAfk() {
         if (!this.afk) {
-            this.afkMessage = AlertAFK.plugin.defaultAfkMessage;
-            player.sendMessage(ChatColor.YELLOW + "You are now AFK - " + this.afkMessage);
-            if (AlertAFK.plugin.broadcastGlobally) {
-                Bukkit.broadcastMessage(ChatColor.YELLOW + "Note: " + this.player.getDisplayName() + ChatColor.YELLOW + " is now AFK - " + this.afkMessage);
-            }
+            this.afkMessage = AlertAFK.plugin.getDefaultAfkMessage();
+            player.sendMessage(ChatColor.YELLOW + "You are now AFK: " + this.afkMessage);
+            AlertAFK.plugin.broadcastAfk(this);
             this.afk = true;
             AlertAFK.plugin.nonAfkPlayers.remove(this.player);
             AlertAFK.plugin.afkPlayers.add(this.player);

@@ -10,6 +10,8 @@
 package com.github.rmsy.alertafk;
 
 import com.github.rmsy.alertafk.base.SimpleConfigManager;
+import com.github.rmsy.alertafk.base.SimplePlayer;
+import com.google.common.base.Preconditions;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -32,6 +34,10 @@ import java.util.List;
 public class AlertAFK extends JavaPlugin {
 
     public static AlertAFK plugin;
+    /**
+     * The configuration manager.
+     */
+    private final ConfigManager configManager;
     public HashMap aaPlayers = new HashMap();
     public List afkPlayers = new ArrayList();
     public List nonAfkPlayers = new ArrayList();
@@ -48,13 +54,14 @@ public class AlertAFK extends JavaPlugin {
 
     private static void setUpPlayers(HashMap hm, Player[] p) {
         for (Player aP : p) {
-            hm.put(aP.getName(), new AAPlayer(aP));
+            hm.put(aP.getName(), new SimplePlayer(aP));
         }
     }
 
     @Override
     public void onEnable() {
         plugin = this;
+        configManager = new SimpleConfigManager(this);
         SimpleConfigManager.setupConfig(plugin);
         getServer().getPluginManager().registerEvents(new AAListener(), plugin);
         Player[] players = Bukkit.getOnlinePlayers();
@@ -94,48 +101,48 @@ public class AlertAFK extends JavaPlugin {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String alias, String[] args) {
         if (sender instanceof Player) {
-            AAPlayer aaPlayer = (AAPlayer) aaPlayers.get(sender.getName());
-            aaPlayer.setNotAfk();
+            SimplePlayer simplePlayer = (SimplePlayer) aaPlayers.get(sender.getName());
+            simplePlayer.setNotAfk();
             if (alias.equalsIgnoreCase("afk") || alias.equalsIgnoreCase("a") || alias.equalsIgnoreCase("away")) {
-                if (aaPlayer.afk) {
-                    aaPlayer.setNotAfk();
+                if (simplePlayer.afk) {
+                    simplePlayer.setNotAfk();
                 } else if (args.length > 0) {
-                    aaPlayer.setAfk(StringUtils.join(args, " "));
+                    simplePlayer.setAfk(StringUtils.join(args, " "));
                 } else {
-                    aaPlayer.setAfk();
+                    simplePlayer.setAfk();
                 }
             } else if (alias.equalsIgnoreCase("alias")) {
                 if ((args.length >= 1) && args[0].equalsIgnoreCase("clear")) {
-                    if (aaPlayer.aliases.toArray().length > 0) {
-                        aaPlayer.aliases.clear();
+                    if (simplePlayer.aliases.toArray().length > 0) {
+                        simplePlayer.aliases.clear();
                         sender.sendMessage(ChatColor.YELLOW + "Your aliases have been cleared.");
                     } else {
                         sender.sendMessage(ChatColor.YELLOW + "You don't have any aliases.");
                     }
                 } else if ((args.length >= 1) && args[0].equalsIgnoreCase("list")) {
-                    if (aaPlayer.aliases.toArray().length > 0) {
-                        sender.sendMessage(ChatColor.YELLOW + "Your aliases: " + StringUtils.join(aaPlayer.aliases.toArray(), ", "));
+                    if (simplePlayer.aliases.toArray().length > 0) {
+                        sender.sendMessage(ChatColor.YELLOW + "Your aliases: " + StringUtils.join(simplePlayer.aliases.toArray(), ", "));
                     } else {
                         sender.sendMessage(ChatColor.YELLOW + "You don't have any aliases.");
                     }
                 } else if ((args.length >= 2) && args[0].equalsIgnoreCase("add")) {
                     if (args[1].length() >= 3) {
-                        if (aaPlayer.aliases.toArray().length > 0) {
-                            aaPlayer.aliases.add(args[1]);
+                        if (simplePlayer.aliases.toArray().length > 0) {
+                            simplePlayer.aliases.add(args[1]);
                             sender.sendMessage(ChatColor.YELLOW + args[1] + ChatColor.YELLOW + " has been added to your aliases.");
                         } else {
-                            aaPlayer.aliases = new ArrayList();
-                            aaPlayer.aliases.add(args[1]);
+                            simplePlayer.aliases = new ArrayList();
+                            simplePlayer.aliases.add(args[1]);
                             sender.sendMessage(ChatColor.YELLOW + args[1] + ChatColor.YELLOW + " has been added to your aliases.");
                         }
                     } else {
                         sender.sendMessage(ChatColor.RED + "Aliases must be at least 3 characters in length.");
                     }
                 } else if ((args.length >= 2) && args[0].equalsIgnoreCase("del")) {
-                    if (aaPlayer.aliases.toArray().length < 1) {
+                    if (simplePlayer.aliases.toArray().length < 1) {
                         sender.sendMessage(ChatColor.YELLOW + "You don't have any aliases.");
-                    } else if (aaPlayer.aliases.contains(args[1])) {
-                        aaPlayer.aliases.remove(args[1]);
+                    } else if (simplePlayer.aliases.contains(args[1])) {
+                        simplePlayer.aliases.remove(args[1]);
                         sender.sendMessage(ChatColor.YELLOW + args[1] + ChatColor.YELLOW + " has been removed from your aliases.");
                     } else {
                         sender.sendMessage(ChatColor.YELLOW + args[1] + " is not an alias.");
@@ -147,6 +154,17 @@ public class AlertAFK extends JavaPlugin {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Broadcasts the specified players' being AFK, if global broadcasting is enabled.
+     *
+     * @param player The player who is AFK.
+     */
+    public void broadcastAfk(@Nonnull final com.github.rmsy.alertafk.Player player) {
+        if (this.broadcastGlobally) {
+            Bukkit.broadcastMessage(ChatColor.GOLD + Preconditions.checkNotNull(player, "broadcastAfk() got null Player").getPlayer().getDisplayName() + ChatColor.RESET + ChatColor.GOLD + " is now AFK, with message: " + ChatColor.ITALIC + player.getAfkMessage());
+        }
     }
 
     /**

@@ -9,21 +9,20 @@
  */
 package com.github.rmsy.alertafk.base;
 
-import com.github.rmsy.alertafk.AAPlayer;
 import com.github.rmsy.alertafk.AlertAFK;
+import com.github.rmsy.alertafk.ConfigManager;
 import com.google.common.base.Preconditions;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Isaac Moore <rmsy@me.com>
  */
-public final class SimpleConfigManager {
+public final class SimpleConfigManager implements ConfigManager {
 
     /**
      * The plugin instance.
@@ -60,12 +59,19 @@ public final class SimpleConfigManager {
             Preconditions.checkNotNull(afkMessages, "setupConfig() found an empty AFK message list; why aren't the defaults loaded?").add(outdatedAfkMessage);
             config.set("aesthetic.defaultAfkMessage", null);
         }
+
     }
 
-    public static void savePlayerAliases(AlertAFK plugin, AAPlayer player) {
+    /**
+     * Saves a player's aliases to the configuration.
+     *
+     * @param player The player whose aliases should be saved.
+     */
+    @Override
+    public void savePlayerAliases(com.github.rmsy.alertafk.Player player) {
         FileConfiguration config = plugin.getConfig();
         if (config != plugin.config) {
-            setupConfig(plugin);
+            setupConfig();
         }
         if (player.aliases.toArray().length > 0) {
             plugin.config.set("aliases." + player.player.getName(), player.aliases);
@@ -73,12 +79,17 @@ public final class SimpleConfigManager {
         plugin.saveConfig();
     }
 
-    public static void saveAllAliases(AlertAFK plugin) {
+    /**
+     * Saves every online player's aliases to the configuration.
+     */
+    @Override
+    public void saveAllAliases() {
         Player[] onlinePlayers = Bukkit.getOnlinePlayers();
         for (Player p : onlinePlayers) {
-            AAPlayer aaPlayer = (AAPlayer) plugin.aaPlayers.get(p.getName());
-            savePlayerAliases(plugin, aaPlayer);
+            SimplePlayer simplePlayer = (SimplePlayer) plugin.aaPlayers.get(p.getName());
+            savePlayerAliases(simplePlayer);
         }
         plugin.saveConfig();
     }
+
 }

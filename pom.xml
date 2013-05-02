@@ -33,8 +33,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             <name>Isaac Moore</name>
             <email>rmsy@me.com</email>
             <url>http://alpha.app.net/rmsy</url>
-            <organization>MCBall</organization>
-            <organizationUrl>http://mcball.net/</organizationUrl>
             <roles>
                 <role>Programming</role>
                 <role>Project direction</role>
@@ -76,16 +74,33 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             <version>R6</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>com.sk89q</groupId>
+            <artifactId>command-framework-bukkit</artifactId>
+            <version>0.4-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sk89q</groupId>
+            <artifactId>command-framework-core</artifactId>
+            <version>0.4-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <repositories>
         <repository>
             <id>bukkit-repo</id>
+            <name>Bukkit repository</name>
             <url>http://repo.bukkit.org/content/groups/public</url>
         </repository>
         <repository>
-            <id>Plugin Metrics</id>
+            <id>plugin-metrics-repository</id>
+            <name>Plugin Metrics repository</name>
             <url>http://repo.mcstats.org/content/repositories/public</url>
+        </repository>
+        <repository>
+            <id>overcast-network-repository</id>
+            <name>Overcast Network repository</name>
+            <url>http://repo.oc.tc/content/groups/public/</url>
         </repository>
     </repositories>
 
