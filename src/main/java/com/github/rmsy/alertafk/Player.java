@@ -57,6 +57,13 @@ public interface Player {
     void setNotAfk();
 
     /**
+     * Gets whether or not the player is AFK.
+     *
+     * @return Whether or not the player is AFK.
+     */
+    boolean isAfk();
+
+    /**
      * Gets the relative Bukkit player.
      *
      * @return The relative Bukkit player.

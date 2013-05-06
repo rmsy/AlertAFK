@@ -23,6 +23,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.mcstats.Metrics;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,7 +39,7 @@ public class AlertAFK extends JavaPlugin {
      * The configuration manager.
      */
     private final ConfigManager configManager;
-    public HashMap aaPlayers = new HashMap();
+    public HashMap<String, com.github.rmsy.alertafk.Player> aaPlayers = new HashMap();
     public List afkPlayers = new ArrayList();
     public List nonAfkPlayers = new ArrayList();
     /**
@@ -193,6 +194,17 @@ public class AlertAFK extends JavaPlugin {
      */
     public boolean isBroadcastGlobally() {
         return broadcastGlobally;
+    }
+
+    /**
+     * Gets the {@link com.github.rmsy.alertafk.Player} with the specified name, or null if none exists.
+     *
+     * @param name The name of the player to get.
+     * @return The player with the specified name, or null if none exists.
+     */
+    @Nullable
+    public com.github.rmsy.alertafk.Player getPlayer(@Nonnull final String name) {
+        return aaPlayers.get(name);
     }
 
     /**

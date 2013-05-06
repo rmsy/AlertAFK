@@ -14,6 +14,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.List;
 
 /**
@@ -45,6 +47,58 @@ public final class SimplePlayer implements com.github.rmsy.alertafk.Player {
             AlertAFK.plugin.afkPlayers.remove(this.player);
             AlertAFK.plugin.nonAfkPlayers.add(this.player);
         }
+    }
+
+    /**
+     * Gets whether or not the player is AFK.
+     *
+     * @return Whether or not the player is AFK.
+     */
+    @Override
+    public boolean isAfk() {
+        return afk;
+    }
+
+    /**
+     * Gets the relative Bukkit player.
+     *
+     * @return The relative Bukkit player.
+     */
+    @Nonnull
+    @Override
+    public Player getPlayer() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    /**
+     * Gets the player's current AFK message.
+     *
+     * @return The player's AFK message, or null if not AFK.
+     */
+    @Nullable
+    @Override
+    public String getAfkMessage() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    /**
+     * Sets the player as AFK with the specified message.
+     *
+     * @param message The message to be used when setting the player as AFK.
+     */
+    @Override
+    public void setAfkWithMessage(@Nonnull String message) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    /**
+     * Modifies the player's AFK message while they're AFK. If the player is not AFK, this is ignored.
+     *
+     * @param message The message to set.
+     */
+    @Override
+    public void changeAfkMessage(@Nonnull String message) {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     /**
