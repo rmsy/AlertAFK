@@ -37,6 +37,7 @@ public final class Commands {
             min = 0,
             usage = "[-p:<player>] [message]"
     )
+    @CommandPermissions("user.toggleafk")
     public void afkCommand(@Nonnull final CommandContext context, @Nonnull final CommandSender sender) throws CommandException {
         if (Preconditions.checkNotNull(sender, "afkCommand() got null CommandSender") instanceof org.bukkit.entity.Player) {
             org.bukkit.entity.Player target = (org.bukkit.entity.Player) sender;
@@ -69,6 +70,7 @@ public final class Commands {
             min = 1,
             usage = "<player> [message]"
     )
+    @CommandPermissions("admin.toggleotherafk")
     @Console
     public void setOtherAfkCommand(@Nonnull final CommandContext context, @Nonnull final CommandSender sender) throws CommandException {
         Preconditions.checkNotNull(sender, "setOtherAfkCommand() got null CommandSender");
